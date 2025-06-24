@@ -1,11 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openaiApiKey = process.env.OPENAI_API_KEY;
+
+if (!openaiApiKey) {
+  console.warn("⚠️ OPENAI_API_KEY não está definida. O endpoint não funcionará até que seja configurada.");
+}
+
+const openai = openaiApiKey
+  ? new OpenAI({ apiKey: openaiApiKey })
+  : null;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (!openai) {
+    return res.status(500).json({ error: "OPENAI_API_KEY não configurada. Contate o administrador." });
+  }
+
   try {
     const { message } = req.body;
 
