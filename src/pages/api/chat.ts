@@ -4,29 +4,26 @@ import OpenAI from "openai";
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
 if (!openaiApiKey) {
-  console.warn("⚠️ OPENAI_API_KEY não está definida. O endpoint não funcionará até que seja configurada.");
+  console.warn("⚠️ OPENAI_API_KEY não está definida.");
 }
 
-const openai = openaiApiKey
-  ? new OpenAI({ apiKey: openaiApiKey })
-  : null;
+const openai = openaiApiKey ? new OpenAI({ apiKey: openaiApiKey }) : null;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!openai) {
-    return res.status(500).json({ error: "OPENAI_API_KEY não configurada. Contate o administrador." });
+    return res.status(500).json({ error: "OPENAI_API_KEY não configurada" });
   }
 
-  try {
-    const { message } = req.body;
+  const { message } = req.body;
 
-    const chatCompletion = await openai.chat.completions.create({
+  try {
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: message }],
     });
 
-    res.status(200).json({ result: chatCompletion.choices[0].message.content });
+    res.status(200).json({ result: completion.choices[0].message.content });
   } catch (error: any) {
     res.status(500).json({ error: error.message || "Erro desconhecido" });
   }
 }
-// Pequena alteração só para forçar redeploy
