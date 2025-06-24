@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐶 By Império Dog – Spitz Alemão Anão & Lulu da Pomerânia
 
-## Getting Started
+Repositório oficial do projeto **By Império Dog**, voltado para a criação e apresentação de filhotes de **Spitz Alemão Anão (Lulu da Pomerânia)** de altíssimo padrão, com pedigree e entrega nacional.
 
-First, run the development server:
+## 🌟 Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Este projeto reúne o frontend do site oficial da By Império Dog, incluindo:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Galeria de filhotes disponíveis
+- Informações sobre a linhagem
+- Formulários de contato
+- Integração com WhatsApp
+- Layout premium para clientes exigentes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Tecnologias utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [GitHub Pages](https://pages.github.com/) (para deploy estático)
 
-## Learn More
+## 📸 Demonstração
 
-To learn more about Next.js, take a look at the following resources:
+> Captura de tela ou link do site aqui em breve.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📲 Contato
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📧 byimp@byimperio.com  
+📱 WhatsApp: (11) 96863-3239  
+🌐 [www.canillulupomerania.com.br](https://www.canillulupomerania.com.br)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**By Império Dog – Muito mais que um pet. Um membro da família.**
