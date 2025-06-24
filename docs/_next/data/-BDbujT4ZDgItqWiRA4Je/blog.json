@@ -1,0 +1,1 @@
+{"pageProps":{"posts":[{"title":"Exemplo de Post","date":"2025-06-01","slug":"exemplo-post","excerpt":"Resumo do post de exemplo.","coverImage":"/images/blog/exemplo.jpg","content":"\r\n# Título do Exemplo de Post\r\n\r\nEste é um post de exemplo para testar a renderização de MDX.\r\n"}]},"__N_SSG":true}
