@@ -2,30 +2,31 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
-// Verifica se a variável de ambiente existe
-const openaiApiKey = process.env.OPENAI_API_KEY;
-
-if (!openaiApiKey) {
-  console.warn("⚠️ OPENAI_API_KEY não está definida. O endpoint não funcionará até que seja configurada.");
-}
-
-const openai = openaiApiKey ? new OpenAI({ apiKey: openaiApiKey }) : null;
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!openai) {
-    return res.status(500).json({ error: "OPENAI_API_KEY não configurada. Contate o administrador." });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método não permitido" });
+  }
+
+  const { message } = req.body;
+
+  if (!message) {
+    return res.status(400).json({ error: "Mensagem não fornecida" });
   }
 
   try {
-    const { message } = req.body;
-
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4", // ou "gpt-3.5-turbo"
       messages: [{ role: "user", content: message }],
     });
 
-    res.status(200).json({ result: chatCompletion.choices[0].message.content });
+    const reply = chatCompletion.choices[0]?.message?.content;
+    res.status(200).json({ reply });
   } catch (error: any) {
-    res.status(500).json({ error: error.message || "Erro desconhecido" });
+    console.error("Erro ao chamar OpenAI:", error);
+    res.status(500).json({ error: "Erro ao gerar resposta" });
   }
 }
