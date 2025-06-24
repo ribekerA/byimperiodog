@@ -1,25 +1,40 @@
 // src/components/Layout.tsx
 import { ReactNode } from "react";
-import Header from "./Header";
+import Head from "next/head";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ChatWidget from "./Chat/ChatWidget";
 
 interface LayoutProps {
   children: ReactNode;
+  title?: string;
+  description?: string;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, title, description }: LayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
+    <>
+      <Head>
+        <title>{title ? `${title} | By Império Dog` : "By Império Dog – Spitz Alemão Anão & Lulu da Pomerânia"}</title>
+        <meta
+          name="description"
+          content={
+            description ||
+            "Criador especializado em Spitz Alemão Anão (Lulu da Pomerânia) com excelência, genética premium e entrega para todo o Brasil."
+          }
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-      {/* Como o header é fixed, adicionamos um padding-top igual à altura do header (h-16) + margem */}
-      <main className="flex-1 max-w-6xl mx-auto px-4 py-8 mt-16 sm:mt-16">
-        {children}
-      </main>
-
-      <Footer />
-      <ChatWidget />
-    </div>
+      <div className="flex flex-col min-h-screen bg-white text-gray-800 font-sans">
+        <Navbar />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
+        <ChatWidget />
+      </div>
+    </>
   );
 }
