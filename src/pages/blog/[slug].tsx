@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { getPostSlugs, getPostBySlug, Post } from "@/lib/posts";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";

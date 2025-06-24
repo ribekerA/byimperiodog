@@ -1,32 +1,31 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
+import type { NextApiRequest, NextApiResponse } from "next";
+import OpenAI from "openai";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método não permitido" });
-  }
-
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
-    const { messages } = req.body;
-    if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: "Formato inválido de mensagens" });
+    const prompt = req.body.prompt;
+
+    if (!prompt) {
+      return res.status(400).json({ error: "Prompt não fornecido." });
     }
 
-    const response = await openai.createChatCompletion({
-      model: process.env.NEXT_PUBLIC_OPENAI_MODEL || "gpt-3.5-turbo",
-      messages,
-      temperature: 0.7
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.7,
     });
 
-    const completion = response.data.choices[0].message;
-    return res.status(200).json({ message: completion });
+    const result = completion.choices[0]?.message?.content || "";
+    res.status(200).json({ result });
   } catch (error: any) {
-    console.error("Erro na API /api/chat:", error.message || error);
-    return res.status(500).json({ error: "Erro interno no servidor" });
+    console.error("Erro na API OpenAI:", error);
+    res.status(500).json({ error: "Erro ao gerar resposta." });
   }
 }
