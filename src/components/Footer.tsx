@@ -1,4 +1,3 @@
-// src/components/Footer.tsx
 import Link from "next/link";
 import { Facebook, Instagram, Youtube, Mail, QrCode } from "lucide-react";
 

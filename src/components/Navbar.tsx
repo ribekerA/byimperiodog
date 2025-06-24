@@ -1,6 +1,17 @@
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { PawPrint, Menu, X, Moon, Sun, Dog, Phone, Mail } from "lucide-react";
+import {
+  PawPrint,
+  Menu,
+  X,
+  Sun,
+  Moon,
+  Dog,
+  Phone,
+  Mail,
+  Search,
+  Sparkles
+} from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 /**
@@ -20,7 +31,7 @@ export default function Navbar() {
   const navItems = [
     { label: "Filhotes", icon: <Dog className="w-4 h-4 inline-block mr-1" /> },
     { label: "Blog", icon: <PawPrint className="w-4 h-4 inline-block mr-1" /> },
-    { label: "Sobre", icon: <Moon className="w-4 h-4 inline-block mr-1" /> },
+    { label: "Sobre", icon: <Sparkles className="w-4 h-4 inline-block mr-1" /> }
   ];
 
   useEffect(() => {
@@ -44,8 +55,8 @@ export default function Navbar() {
         scrolled ? "shadow-md bg-white/90 backdrop-blur-md border-b border-yellow-200" : "bg-gradient-to-r from-white via-yellow-50 to-white"
       } ${darkMode ? "dark" : ""}`}
     >
-      <div className="w-full bg-pink-100 text-pink-800 text-sm text-center py-1 animate-pulse">
-        ✨ Nova ninhada de Lulu da Pomerânia disponível – clique em "Ver Filhotes"!
+      <div className="w-full bg-yellow-100 text-yellow-900 text-sm text-center py-1 font-medium tracking-tight">
+        🐾 Novidade: Nova ninhada de Spitz Anão disponível — confira os filhotes!
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -63,12 +74,13 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center ml-4 relative">
+        <div className="hidden md:flex items-center relative ml-6">
+          <Search className="absolute left-3 w-4 h-4 text-yellow-500" />
           <input
             type="text"
-            placeholder="Buscar..."
-            className="px-3 py-1.5 border rounded-full text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            placeholder="Buscar filhotes, artigos..."
             ref={searchRef}
+            className="pl-8 pr-3 py-1.5 border border-yellow-300 rounded-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
         </div>
 
@@ -91,16 +103,13 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <motion.div whileHover={{ scale: 1.05 }} className="relative hidden md:inline-flex">
+        <motion.div whileHover={{ scale: 1.05 }} className="hidden md:inline-flex">
           <Link
             href="/filhotes"
-            className="ml-4 inline-flex items-center gap-2 px-5 py-2 border-2 border-yellow-500 text-yellow-700 font-bold rounded-full shadow-sm hover:bg-yellow-500 hover:text-white transition"
+            className="ml-4 inline-flex items-center gap-2 px-5 py-2 border-2 border-yellow-500 text-yellow-700 font-bold rounded-full shadow-md hover:bg-yellow-500 hover:text-white transition"
           >
             <Dog className="w-5 h-5 text-pink-500" />
             Ver Filhotes
-            <span className="ml-2 text-xs bg-pink-500 text-white rounded-full px-2 py-0.5 animate-bounce">
-              1 nova ninhada!
-            </span>
           </Link>
         </motion.div>
 
@@ -121,7 +130,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden bg-white border-t border-yellow-200 px-4 pt-4 pb-2 space-y-3 text-yellow-600 font-medium text-lg shadow"
+            className="md:hidden bg-white border-t border-yellow-200 px-4 pt-4 pb-2 space-y-3 text-yellow-700 font-medium text-lg shadow"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -139,16 +148,16 @@ export default function Navbar() {
             <Link
               href="/filhotes"
               onClick={closeMenu}
-              className="inline-block mt-2 px-5 py-2 border-2 border-yellow-500 text-yellow-700 font-bold rounded-full shadow-sm hover:bg-yellow-500 hover:text-white transition"
+              className="inline-block mt-2 px-5 py-2 border-2 border-yellow-500 text-yellow-700 font-bold rounded-full shadow hover:bg-yellow-500 hover:text-white transition"
             >
               Ver Filhotes
             </Link>
-            <div className="flex space-x-4 pt-2 border-t mt-2">
-              <Link href="tel:+5511999999999" className="flex items-center gap-1 text-sm">
-                <Phone className="w-4 h-4" /> (11) 99999-9999
+            <div className="flex space-x-4 pt-2 border-t mt-2 text-sm">
+              <Link href="tel:+5511968633239" className="flex items-center gap-1">
+                <Phone className="w-4 h-4" /> (11) 96863-3239
               </Link>
-              <Link href="mailto:contato@byimperiodog.com" className="flex items-center gap-1 text-sm">
-                <Mail className="w-4 h-4" /> contato@byimperiodog.com
+              <Link href="mailto:contato@byimperiodog.com.br" className="flex items-center gap-1">
+                <Mail className="w-4 h-4" /> contato@byimperiodog.com.br
               </Link>
             </div>
           </motion.div>

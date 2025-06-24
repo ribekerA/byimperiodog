@@ -1,22 +1,16 @@
-// src/components/Chat/ChatWidget.tsx
-import { useEffect } from "react";
+import Link from "next/link";
+import { MessageCircle } from "lucide-react";
 
 export default function ChatWidget() {
-  useEffect(() => {
-    // Simulação de widget de chat ou botão de WhatsApp
-    console.log("ChatWidget carregado");
-  }, []);
-
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <a
+    <div className="fixed bottom-4 right-4 z-50">
+      <Link
         href="https://wa.me/5511968633239"
         target="_blank"
-        rel="noopener noreferrer"
-        className="bg-green-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-green-600 transition"
+        className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded-full shadow-lg"
       >
-        Fale Conosco 💬
-      </a>
+        <MessageCircle className="w-4 h-4" /> Fale Conosco
+      </Link>
     </div>
   );
 }
