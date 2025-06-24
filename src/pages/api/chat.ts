@@ -1,15 +1,15 @@
+// src/pages/api/chat.ts
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
+// Verifica se a variável de ambiente existe
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
 if (!openaiApiKey) {
   console.warn("⚠️ OPENAI_API_KEY não está definida. O endpoint não funcionará até que seja configurada.");
 }
 
-const openai = openaiApiKey
-  ? new OpenAI({ apiKey: openaiApiKey })
-  : null;
+const openai = openaiApiKey ? new OpenAI({ apiKey: openaiApiKey }) : null;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!openai) {
