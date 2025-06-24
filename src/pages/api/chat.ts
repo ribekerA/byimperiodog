@@ -1,25 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
-const openaiApiKey = process.env.OPENAI_API_KEY;
-
-if (!openaiApiKey) {
-  console.warn("⚠️ OPENAI_API_KEY não está definida.");
-}
-
-const openai = openaiApiKey ? new OpenAI({ apiKey: openaiApiKey }) : null;
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!openai) {
-    return res.status(500).json({ error: "OPENAI_API_KEY não configurada" });
-  }
-
-  const { message } = req.body;
-
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
+      messages: [{ role: "user", content: req.body.message }],
     });
 
     res.status(200).json({ result: completion.choices[0].message.content });
